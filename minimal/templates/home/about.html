@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block metatags %}
+<title>About | Minimal</title>
+<meta name="description" content="Explain minimal.">
+{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div>
+        <ol class="breadcrumb small">
+            <li class="breadcrumb-item"><a href="{{url_for('bl_home.index')}}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">About</li>
+        </ol>
+    </div>
+
+    <h1>About this site</h1>
+    <p class="lead">This site is a demo for a minimalistic yet scalable Flask + Boostrap 5 project.</p>
+    <p>It features many basic interesting goodies, such as: complete responsiveness, sound structure, modals + alerts, a full fledged cookie banner,
+        a navbar with highlights, nice urls and other SEO crucial details.</p>
+    <p>Get the code on GitHub <a href="https://github.com/VarianceDigital/minimal" target="_blank">here</a></p>
+    <p>Read full info <a href="https://github.com/VarianceDigital/minimal#readme" target="_blank">here</a></p>
+    
+</div>
+{% endblock %}

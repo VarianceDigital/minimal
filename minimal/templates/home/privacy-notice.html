@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block metatags %}
+{% endblock %}
+
+{% block contents %}
+	<div class="container">
+		<div>
+			<ol class="breadcrumb small">
+				<li class="breadcrumb-item"><a href="{{url_for('bl_home.index')}}">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Pricavy notice</li>
+			</ol>
+		</div>
+	
+		<h1>Privacy Notice</h2>
+		<p class="lead">Your privacy policy goes here.</p>
+	</div>
+{% endblock %}

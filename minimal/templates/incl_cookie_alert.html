@@ -1,0 +1,73 @@
+<form method="post">
+<div class="modal fade" id="cookieModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg shadow" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span style="font-weight: bold" class="modal-title">Cookie Settings</span>
+            </div>
+            <div data-nosnippet class="modal-body">
+                <div style="font-size: 80%">
+                    <p id="cmText1"></p> 
+                    <p id="cmText2"></p>
+                </div>
+                <p class="d-flex justify-content-between">
+                    <a href="{{url_for('bl_home.privacy')}}">Privacy Notice</a>
+                    <a href="#alert-options" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="alert-options">My Settings</a>
+                </p>
+                <div id="alert-options" class="collapse">
+                    <div data-name="necessary">
+                        <div class="form-check mb-1">
+                            <input type="checkbox" checked disabled class="form-check-input" id="checkboxNecessary">
+                            <label class="form-check-label" for="checkboxNecessary"><b>Necessary</b></label>
+                        </div>
+                        <ul>
+                            <li>Required to run the website</li>
+                        </ul>
+                    </div>
+                    <div data-name="analysis">
+                        <div class="form-check mb-1">
+                            <input type="checkbox" class="form-check-input" id="checkboxAnalysis" name="checkboxAnalysis"
+                            {%if g.policyCode==1 or g.policyCode==3%}
+                            checked
+                            {%endif%}
+                            >
+                            <label class="form-check-label" for="checkboxAnalysis"><b>Analysis</b></label>
+                        </div>
+                        <ul>
+                            <li>Monitoring website usage and optimizing the user experience</li>
+                            <!--li>Evaluation of marketing actions</li-->
+                        </ul>
+                    </div>
+                    <!--div data-name="personalization">
+                        <div class="form-check mb-1">
+                            <input type="checkbox" class="form-check-input" id="checkboxPersonalization" name="checkboxPersonalization"
+                            {%if g.policyCode==2 or g.policyCode==3%}
+                            checked
+                            {%endif%}
+                            >
+                            <label class="form-check-label" for="checkboxPersonalization"><b>Personalization</b></label>
+                        </div>
+                        <ul>
+                            <li>Storage of your preferences from previous visits</li>
+                            <li>Collecting user feedback to improve our website</li>
+                            <li>Recording of your interests in order to provide customised content and offers</li>
+                        </ul>
+                    </div-->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSaveCookieSettings" name="btnSaveCookieSettings" type="submit" class="btn btn-outline-dark">Save settings</button>
+                <button id="btnAgreeEssential" name="btnAgreeEssential" type="submit" class="btn btn-secondary">Agree to essential</button>
+                <button id="btnAgreeAll" name="btnAgreeAll" type="submit" class="btn btn-secondary">Agree to all</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+{%if g.showCookieAlert==true%}
+<script>
+    var myModal = new bootstrap.Modal(document.getElementById('cookieModal'), 
+                        {backdrop: 'static', keyboard: false});
+    myModal.show();
+</script>
+{%endif%}

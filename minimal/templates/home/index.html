@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block metatags %}
+<title>Minimal</title>
+<meta name="description" content="Minimal.">
+{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <h1 style="margin-top:37px;">Home page</h1>
+    <p class="lead">Home page contents go here.</p>
+    <p>Learn more <a href="{{url_for('bl_home.about')}}">about</a> this site.</p>
+</div>
+{% endblock %}

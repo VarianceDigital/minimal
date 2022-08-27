@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block metatags %}
+{% endblock %}
+
+{% block contents %}
+
+<div class="container">
+	<div class="row">
+		<ol class="breadcrumb small">
+			<li class="breadcrumb-item"><a href="{{url_for('bl_home.index')}}">Home</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Error 404</li>
+		</ol>
+	</div>
+	<div class="row text-center">
+		<div class="col-12">
+			<h2 class="mb-5">Sorry, the page you requested was not found.</h2>
+			<p class="mb-0">This page might have been moved, updated or deleted.</p>
+			<p>Please visit the <a href="{{url_for('bl_home.index')}}">Home</a> or <a href="{{url_for('bl_home.about')}}">About</a> pages.</p> 
+		</div>
+	</div>
+	<div class="row text-center">
+		<div class="col-12">
+			<div class="imgHolder">
+				<img style="max-width: 50%;" src="{{url_for('static',filename='images/error404.webp')}}" class="img-fluid" alt="">
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+{% endblock %}

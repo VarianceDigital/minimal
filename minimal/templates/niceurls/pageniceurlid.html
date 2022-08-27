@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block metatags %}
+<title>Test nice urls | Minimal</title>
+<meta name="description" content="Example 2">
+{% endblock %}
+
+{% block contents %}
+<div class="container">
+
+    <div>
+        <ol class="breadcrumb small">
+            <li class="breadcrumb-item"><a href="{{url_for('bl_home.index')}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{url_for('bl_niceurls.niceurlsspawn')}}">Nice urls</a></li>
+            <li class="breadcrumb-item active" aria-current="page">I am... with id</li>
+        </ol>
+    </div>
+
+    <h1>{{page_title_for_id}}</h1>
+    <p class="lead">Have a look at the url of this page :)<br></p>
+
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block metatags %}
+<title>Test modals | Minimal</title>
+<meta name="description" content="Testing modal forms">
+{% endblock %}
+
+{% block contents %}
+<div class="container">
+  <div>
+    <ol class="breadcrumb small">
+        <li class="breadcrumb-item"><a href="{{url_for('bl_home.index')}}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Test modals</li>
+    </ol>
+  </div>
+  
+  <h1>Test modals</h1>
+
+    {%if error > 0%}
+    <div class="alert alert-danger" role="alert">
+      {{error|displayError}}
+    </div>
+    {%endif%}
+
+    <p class="lead">Select buttons to show popup modals!<br></p>
+    <form method="post">
+        <p><button class="btn btn-danger" type="submit" name="btn_error">SHOW ERROR MESSAGE ON THIS PAGE</button></p>
+        <p><button class="btn btn-success" type="submit" name="btn_alert">SHOW POPUP ON THIS PAGE</button></p>
+        <p><button class="btn btn-warning" type="submit" name="btn_msg">SHOW MESSAGE GOING TO HOME PAGE</button></p>
+        <p><a class="btn btn-outline-dark" href="javascript:open_cookie_alert();">SHOW COOKIE BANNER</a></p>
+    </form>
+</div>
+{% endblock %}

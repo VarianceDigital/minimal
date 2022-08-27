@@ -1,0 +1,32 @@
+<!-- Modal -->
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="modal" id="msgModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Minimal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message|displayMessage }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var myModal = new bootstrap.Modal(document.getElementById("msgModal"), {});
+    document.onreadystatechange = function () {
+        myModal.show();
+    };
+</script>
+{% endif %}
+{% endwith %}
+

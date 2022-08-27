@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block metatags %}
+<title>Test nice urls | Minimal</title>
+<meta name="description" content="Nice urls page">
+{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div>
+        <ol class="breadcrumb small">
+            <li class="breadcrumb-item"><a href="{{url_for('bl_home.index')}}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nice urls</li>
+        </ol>
+    </div>
+
+    <h1>Nice urls</h1>
+
+    <p class="lead">Follow links to the pages and see nice urls<br></p>
+    <ul>
+        <li>
+            <a href="{{url_for('bl_niceurls.niceurl', slug=(page_title|slugify))}}">Page with title showing a nice url</a>
+        </li>
+        <li>
+            <a href="{{url_for('bl_niceurls.niceurlid', slug=(page_title_for_id|slugify), id=6)}}">Page with title showing a nice url, with id</a>
+        </li>
+    </ul>
+
+
+</div>
+{% endblock %}
