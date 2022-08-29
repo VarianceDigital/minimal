@@ -21,7 +21,7 @@ In this repo you'll find the source code for a minimal yet complete Flask + Boos
 - custom error pages
 - in-page error alert
 
-Boostrap 5 is used:
+Bootstrap 5 is used:
 - to make the site fully responsive
 - for modal popups and the cookie banner
 - for the navbar (it's just an easy option)
