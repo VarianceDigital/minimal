@@ -7,7 +7,7 @@ from .auth import *
 bp = Blueprint('bl_modals', __name__, url_prefix='/modals')
 
 @bp.route('/',methods=('GET', 'POST'))
-@manageCookiePolicy
+@manage_cookie_policy
 def testmodals():
     mc = set_menu("test")
 

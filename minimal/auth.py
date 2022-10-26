@@ -28,7 +28,7 @@ def pre_operations():
     g.policyCode = 0 #SET DEFAULT INDEPENDENTLY TO WRAPPER
 
 #WRAPPER FOR COOKIE SETTINGS 
-def manageCookiePolicy(view):
+def manage_cookie_policy(view):
 
     @functools.wraps(view)
     def wrapped_view(**kwargs):
