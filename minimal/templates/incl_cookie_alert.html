@@ -26,7 +26,7 @@
                     <div data-name="analysis">
                         <div class="form-check mb-1">
                             <input type="checkbox" class="form-check-input" id="checkboxAnalysis" name="checkboxAnalysis"
-                            {%if g.policyCode==1 or g.policyCode==3%}
+                            {%if g.policyCode>1%}
                             checked
                             {%endif%}
                             >
@@ -65,6 +65,9 @@
 
 <script>
 
+    var myCookieBanner = new bootstrap.Modal(document.getElementById('cookieModal'), 
+                        {backdrop: 'static', keyboard: false});
+
     var cookieButttonClick = function (event) {
         
         var source = event.target || event.srcElement;
@@ -91,14 +94,16 @@
                 checkboxAnalysis:document.getElementById('checkboxAnalysis').checked,
             }
         //$('#cookieModal').modal("hide")
-        myModal.hide();
+        console.log(myCookieBanner);
+        myCookieBanner.hide();
         const xhr = new XMLHttpRequest()
         xhr.open('POST', "{{url_for('auth.ajcookiepolicy')}}")
         xhr.setRequestHeader('Content-type', 'application/json')
         xhr.responseType = "json"; //CRUCIAL!
         xhr.send(JSON.stringify(params)) // Make sure to stringify
         xhr.onload = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
+            if (xhr.readyState == 4 && xhr.status == 204) {
+                //status response from Flask with exact number!
                 console.log(`User preferences saved`);
             } else {
                 console.log(`Error: ${xhr.status}`);
@@ -106,6 +111,12 @@
         }
     }
     
+    //THIS FUNCTION IS CALLED BY THE FOOTER LINK: IT SHOULD OPEN THE 
+    //COOKIE ALERT MODAL.
+    function open_cookie_alert(){
+	    myCookieBanner.show();
+    }
+
     const cookiebuttons = document.getElementsByClassName("cookiebutton");
     Array.from(cookiebuttons).forEach(function (element) {
         element.addEventListener("click", cookieButttonClick);
@@ -114,8 +125,6 @@
 
 {%if g.showCookieAlert==true%}
 <script>
-    var myModal = new bootstrap.Modal(document.getElementById('cookieModal'), 
-                        {backdrop: 'static', keyboard: false});
-    myModal.show();
+    myCookieBanner.show();
 </script>
 {%endif%}

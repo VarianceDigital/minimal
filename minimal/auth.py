@@ -1,7 +1,7 @@
 import functools
 from flask import current_app
 from flask import (
-    Blueprint, g, redirect, request, session
+    Blueprint, g, redirect, request, session, Response
 )
 
 import os
@@ -26,6 +26,12 @@ def pre_operations():
             return redirect(url, code=code)
             
     g.policyCode = 0 #SET DEFAULT INDEPENDENTLY TO WRAPPER
+    policyCode = session.get("cookie-policy")
+    #possible values Null -> no info, 0 -> Strict, 1 -> Minimal, 
+    #                                 2 -> Analisys, 3 -> All
+    if policyCode !=None:
+        g.policyCode = policyCode
+
 
 #WRAPPER FOR COOKIE SETTINGS 
 def manage_cookie_policy(view):
@@ -33,15 +39,8 @@ def manage_cookie_policy(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
 
-        policyCode = session.get("cookie-policy")
-        #possible values Null -> no info, 0 -> minimal, 1 -> Analysis, 
-        #                                 2 -> Personalization, 3 -> All
-        g.policyCode = 0
-        if policyCode !=None:
-            g.policyCode = policyCode
-
         g.showCookieAlert = False #DEFAULT
-        if policyCode == None:
+        if g.policyCode == None:
             g.showCookieAlert = True
 
 
