@@ -57,16 +57,19 @@ def ajcookiepolicy():
         data = request.json
         btn_name = data['btnselected']
         checkbox_analysis = data['checkboxAnalysis']
-        checkbox_necessary = data['checkboxPersonalization']
+        checkbox_necessary = data['checkboxNecessary']
         if btn_name == 'btnAgreeAll':
             session['cookie-policy'] = 3
         elif btn_name == 'btnAgreeEssential':
-            session['cookie-policy'] = 0
+            session['cookie-policy'] = 1
         elif btn_name == 'btnSaveCookieSettings':
             session['cookie-policy'] = 0 #default
-            if checkbox_analysis:
+            if checkbox_necessary and not checkbox_analysis:
                 session['cookie-policy'] = 1
-            if checkbox_necessary and checkbox_analysis:
+            elif checkbox_analysis and not checkbox_necessary:
+                #never happends if main checkbox disabled!
+                session['cookie-policy'] = 2
+            elif checkbox_necessary and checkbox_analysis:
                 session['cookie-policy'] = 3
 
     return Response(status=204)
