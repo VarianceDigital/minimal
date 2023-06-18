@@ -33,20 +33,6 @@ def manage_cookie_policy(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
 
-        if request.method == 'POST':
-            if 'btnAgreeAll' in request.form:
-                session['cookie-policy'] = 3
-            elif 'btnAgreeEssential' in request.form:
-                session['cookie-policy'] = 0
-            elif 'btnSaveCookieSettings' in request.form:
-                session['cookie-policy'] = 0 #default
-                if 'checkboxAnalysis' in request.form:
-                    session['cookie-policy'] = 1
-                if 'checkboxPersonalization' in request.form:
-                    session['cookie-policy'] = 2
-                if 'checkboxPersonalization' in request.form and 'checkboxAnalysis' in request.form:
-                    session['cookie-policy'] = 3
-
         policyCode = session.get("cookie-policy")
         #possible values Null -> no info, 0 -> minimal, 1 -> Analysis, 
         #                                 2 -> Personalization, 3 -> All
@@ -62,3 +48,25 @@ def manage_cookie_policy(view):
         return view(**kwargs)
 
     return wrapped_view
+
+
+@bp.route('/ajcookiepolicy/',methods=('GET', 'POST'))
+def ajcookiepolicy():
+    #DECIDE COOKIE PREFERENCE STRATEGY
+    if request.method == 'POST':
+        data = request.json
+        btn_name = data['btnselected']
+        checkbox_analysis = data['checkboxAnalysis']
+        checkbox_necessary = data['checkboxPersonalization']
+        if btn_name == 'btnAgreeAll':
+            session['cookie-policy'] = 3
+        elif btn_name == 'btnAgreeEssential':
+            session['cookie-policy'] = 0
+        elif btn_name == 'btnSaveCookieSettings':
+            session['cookie-policy'] = 0 #default
+            if checkbox_analysis:
+                session['cookie-policy'] = 1
+            if checkbox_necessary and checkbox_analysis:
+                session['cookie-policy'] = 3
+
+    return Response(status=204)
