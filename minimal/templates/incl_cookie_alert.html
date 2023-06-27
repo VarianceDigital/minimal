@@ -92,9 +92,7 @@
                 btnselected: source.id,
                 checkboxNecessary:document.getElementById('checkboxNecessary').checked,
                 checkboxAnalysis:document.getElementById('checkboxAnalysis').checked,
-            }
-        //$('#cookieModal').modal("hide")
-        console.log(myCookieBanner);
+        }
         myCookieBanner.hide();
         const xhr = new XMLHttpRequest()
         xhr.open('POST', "{{url_for('auth.ajcookiepolicy')}}")
