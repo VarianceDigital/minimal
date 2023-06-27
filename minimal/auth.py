@@ -25,7 +25,7 @@ def pre_operations():
             code = 301
             return redirect(url, code=code)
             
-    g.policyCode = 0 #SET DEFAULT INDEPENDENTLY TO WRAPPER
+    g.policyCode = -1 #SET DEFAULT INDEPENDENTLY TO WRAPPER
     policyCode = session.get("cookie-policy")
     #possible values Null -> no info, 0 -> Strict, 1 -> Minimal, 
     #                                 2 -> Analisys, 3 -> All
@@ -40,7 +40,7 @@ def manage_cookie_policy(view):
     def wrapped_view(**kwargs):
 
         g.showCookieAlert = False #DEFAULT
-        if g.policyCode == None:
+        if g.policyCode == -1:
             g.showCookieAlert = True
 
         return view(**kwargs)
