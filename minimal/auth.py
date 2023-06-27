@@ -43,7 +43,6 @@ def manage_cookie_policy(view):
         if g.policyCode == None:
             g.showCookieAlert = True
 
-
         return view(**kwargs)
 
     return wrapped_view
